@@ -1,11 +1,9 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <router-view/>
 </template>
 
 <style>
-html, body, #app {
+html, body {
   margin: 0;
   height: 100%;
 }
