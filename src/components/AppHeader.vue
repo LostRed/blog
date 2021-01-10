@@ -41,4 +41,7 @@ export default {
   display: flex;
   justify-content: center;
 }
+.{
+  vertical-align: middle;
+}
 </style>

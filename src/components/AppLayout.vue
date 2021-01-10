@@ -66,6 +66,7 @@ export default {
 .el-header {
   display: flex;
   justify-content: center;
+  line-height: 60px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 
