@@ -4,7 +4,7 @@
       <a href="#"><img src="../assets/logo.png" alt="logo"/></a>
     </div>
     <el-col class="hidden-xs-only" :span="10">
-      <el-menu class="menu" mode="horizontal" >
+      <el-menu class="menu" mode="horizontal">
         <el-menu-item index="1">首页</el-menu-item>
         <el-menu-item index="2">分类</el-menu-item>
         <el-menu-item index="3">标签</el-menu-item>
@@ -37,11 +37,12 @@ export default {
   height: 100%;
 }
 
-.menu{
+.menu {
   display: flex;
   justify-content: center;
 }
-.{
+
+. {
   vertical-align: middle;
 }
 </style>

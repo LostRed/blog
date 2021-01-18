@@ -4,8 +4,14 @@
       <app-header/>
     </template>
     <template>
-      <div class="dev">
-        <h1>项目正在施工~( •̀ ω •́ )y</h1>
+      <div class="page">
+        <div class="left-container">
+          <content-card/>
+        </div>
+        <div class="right-container hidden-xs-only">
+          <hot-card/>
+          <new-card/>
+        </div>
       </div>
     </template>
     <template v-slot:footer>
@@ -18,23 +24,45 @@
 import AppLayout from '../components/AppLayout'
 import AppHeader from '../components/AppHeader'
 import AppFooter from '../components/AppFooter'
+import ContentCard from '../components/ContentCard'
+import HotCard from '../components/HotCard'
+import NewCard from '../components/NewCard'
 
 export default {
   name: "home",
   components: {
     AppLayout,
     AppHeader,
-    AppFooter
+    AppFooter,
+    ContentCard,
+    HotCard,
+    NewCard
   }
 }
 </script>
 
 <style scoped>
-.dev {
+.page {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   height: 100%;
   color: #aeb1b6;
+}
+
+.left-container {
+  width: 100%;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+}
+
+.right-container {
+  padding-left: 20px;
+  width: 360px;
+}
+
+.box-card {
+  margin-bottom: 20px;
 }
 </style>
