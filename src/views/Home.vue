@@ -8,7 +8,7 @@
         <div class="left-container">
           <content-card/>
         </div>
-        <div class="right-container hidden-xs-only">
+        <div class="right-container hidden-md-and-down">
           <hot-card/>
           <new-card/>
         </div>
@@ -52,14 +52,13 @@ export default {
 
 .left-container {
   width: 100%;
-  height: 800px;
   display: flex;
   justify-content: center;
 }
 
 .right-container {
-  padding-left: 20px;
   width: 360px;
+  padding-left: 20px;
 }
 
 .box-card {

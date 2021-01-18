@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="all-page">
     <el-header>
       <div class="container">
         <slot name="header"></slot>

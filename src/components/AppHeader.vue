@@ -3,24 +3,51 @@
     <div class="logo-wrap">
       <a href="#"><img src="../assets/logo.png" alt="logo"/></a>
     </div>
-    <el-col class="hidden-xs-only" :span="10">
+    <div class="menu-wrapper hidden-xs-only">
       <el-menu class="menu" mode="horizontal">
         <el-menu-item index="1">首页</el-menu-item>
         <el-menu-item index="2">分类</el-menu-item>
         <el-menu-item index="3">标签</el-menu-item>
         <el-menu-item index="4">归档</el-menu-item>
       </el-menu>
-    </el-col>
-    <el-col class="hidden-xs-only" :span="6">
-      <el-input size="small" placeholder="请输入内容" prefix-icon="el-icon-search">
-      </el-input>
-    </el-col>
+    </div>
+    <div class="user-wrapper hidden-xs-only">
+      <el-dropdown>
+        <div class="user-info el-dropdown-link">
+          <div class="info-item">
+            <a href="#">
+              <el-avatar :size="40" fit="cover" :src="circleUrl">
+                <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="avatar"/>
+              </el-avatar>
+            </a>
+          </div>
+          <div class="info-item">
+            <el-link href="#" :underline="false">lostred</el-link>
+          </div>
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>个人中心</el-dropdown-item>
+          <el-dropdown-item divided>我的收藏</el-dropdown-item>
+          <el-dropdown-item divided>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <div style="margin-left: 20px">
+        <el-button type="primary">
+          发表文章 <i class="el-icon-edit"></i>
+        </el-button>
+      </div>
+    </div>
   </el-row>
 </template>
 
 <script>
 export default {
-  name: "AppHeader"
+  name: "AppHeader",
+  data() {
+    return {
+      circleUrl: require("../../public/avatar.jpg")
+    }
+  }
 }
 </script>
 
@@ -42,7 +69,28 @@ export default {
   justify-content: center;
 }
 
-. {
-  vertical-align: middle;
+.menu-wrapper {
+  margin: 0 20px;
+}
+
+.user-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-item {
+  margin-right: 10px;
+}
+
+.info-item a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
