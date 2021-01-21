@@ -57,14 +57,23 @@ export default {
 </script>
 
 <style scoped>
-.text:hover:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.4;
-  background: #d0aeae;
+.text:hover {
+  cursor: pointer;
+}
+
+.text:hover .content-wrapper {
+  position: relative;
+  top: -1px;
+  left: -1px;
+  cursor: pointer;
+}
+
+.text:hover .article-wrapper {
+  color: #A63030;
+}
+
+.text:hover .article-cover {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
 }
 
 .text {
@@ -93,7 +102,7 @@ export default {
 }
 
 .article-cover {
-  padding: 30px;
+  margin: 30px;
 }
 
 .cover-image {
