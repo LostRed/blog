@@ -57,7 +57,18 @@ export default {
 </script>
 
 <style scoped>
+.text:hover:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  background: #d0aeae;
+}
+
 .text {
+  position: relative;
   font-size: 14px;
 }
 
