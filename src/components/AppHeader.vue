@@ -29,13 +29,11 @@
                         <el-link href="#" :underline="false">登录/注册</el-link>
                     </div>
                 </div>
-                <div v-if="user.username">
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>个人中心</el-dropdown-item>
-                        <el-dropdown-item divided>我的收藏</el-dropdown-item>
-                        <el-dropdown-item divided>退出</el-dropdown-item>
-                    </el-dropdown-menu>
-                </div>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>个人中心</el-dropdown-item>
+                    <el-dropdown-item divided>我的收藏</el-dropdown-item>
+                    <el-dropdown-item divided>退出</el-dropdown-item>
+                </el-dropdown-menu>
             </el-dropdown>
             <div style="margin-left: 20px">
                 <el-button type="primary">

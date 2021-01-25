@@ -32,7 +32,7 @@
                     <div class="info-item">
                         <el-link href="#" :underline="false" style="font-size: 12px;">{{ article.author }}</el-link>
                     </div>
-                    <div class="info-item">{{ article.gmtCreate }}</div>
+                    <div class="info-item">{{ article.gmtCreate.split("T")[0] }}</div>
                     <div class="info-item"><i class="el-icon-view"></i> {{ article.hot }}</div>
                     <div class="info-item">
                         <a href="#">
@@ -59,6 +59,8 @@ export default {
     },
     data() {
         return {
+            current: 1,
+            size: 5,
             articleList: [{
                 id: 0,
                 title: '文章标题',
@@ -79,9 +81,15 @@ export default {
             this.articleList = response.data;
         });
         // 调用后端api
-        // this.$axios.get('/api/blog/article/').then(response => {
-        //   console.log(response.data.data);
-        //   this.articleList = response.data.data.records;
+        // this.$axios.get('/api/blog/article/',
+        //     {
+        //         params: {
+        //             current: this.current,
+        //             size: this.size
+        //         }
+        //     }).then(response => {
+        //     console.log(response.data.data);
+        //     this.articleList = response.data.data.records;
         // });
     }
 }
