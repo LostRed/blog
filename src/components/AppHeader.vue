@@ -16,21 +16,26 @@
                 <div class="user-info el-dropdown-link">
                     <div class="info-item">
                         <a href="#">
-                            <el-avatar :size="40" fit="cover" :src="circleUrl">
+                            <el-avatar :size="35" fit="cover" :src="user.avatar">
                                 <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
                                      alt="avatar"/>
                             </el-avatar>
                         </a>
                     </div>
-                    <div class="info-item">
-                        <el-link href="#" :underline="false">lostred</el-link>
+                    <div class="info-item" v-if="user.username">
+                        <el-link href="#" :underline="false">{{ user.username }}</el-link>
+                    </div>
+                    <div class="info-item" v-else>
+                        <el-link href="#" :underline="false">登录/注册</el-link>
                     </div>
                 </div>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>个人中心</el-dropdown-item>
-                    <el-dropdown-item divided>我的收藏</el-dropdown-item>
-                    <el-dropdown-item divided>退出</el-dropdown-item>
-                </el-dropdown-menu>
+                <div v-if="user.username">
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>个人中心</el-dropdown-item>
+                        <el-dropdown-item divided>我的收藏</el-dropdown-item>
+                        <el-dropdown-item divided>退出</el-dropdown-item>
+                    </el-dropdown-menu>
+                </div>
             </el-dropdown>
             <div style="margin-left: 20px">
                 <el-button type="primary">
@@ -46,7 +51,14 @@ export default {
     name: "AppHeader",
     data() {
         return {
-            circleUrl: require("../../public/avatar.jpg")
+            user: {
+                id: null,
+                username: null,
+                avatar: null,
+                name: null,
+                sex: null,
+                email: null
+            }
         }
     }
 }

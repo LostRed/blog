@@ -31,8 +31,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .footer-top {
     padding: 20px 0;
     border-bottom: 1px solid #4b5054;

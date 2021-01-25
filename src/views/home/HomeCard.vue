@@ -5,7 +5,7 @@
         </div>
         <div v-for="article in articleList" :key="article.id">
             <div class="text item">
-                <div class="content-wrapper" @click="toBlog(article)">
+                <div class="content-wrapper" @click="toArticle(article)">
                     <div class="article-wrapper">
                         <h3 class="article-title">{{ article.title }}</h3>
                         <p class="article-content">
@@ -50,7 +50,7 @@
 export default {
     name: "HomeCard",
     methods: {
-        toBlog(article) {
+        toArticle(article) {
             this.$router.push({
                 name: 'Article',
                 params: {article}
@@ -60,13 +60,13 @@ export default {
     data() {
         return {
             articleList: [{
-                id: 1,
+                id: 0,
                 title: '文章标题',
                 content: '文章内容',
                 cover: 'example.jpg',
                 author: 'lostred',
                 avatar: 'avatar.jpg',
-                gmtCreate: '2020-01-25',
+                gmtCreate: '2021-01-01',
                 hot: 0,
                 catalogue: 'Java'
             }]

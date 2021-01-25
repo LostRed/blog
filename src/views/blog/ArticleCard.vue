@@ -71,6 +71,7 @@ export default {
     display: flex;
     align-items: center;
     font-size: 12px;
+    margin-bottom: 50px;
 }
 
 .info-item {
