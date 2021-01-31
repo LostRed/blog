@@ -1,7 +1,7 @@
 <template>
     <el-card class="box-card">
         <div class="search-wrapper">
-            <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
+            <el-input v-model="keyword" placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
         </div>
         <div v-for="article in articleList" :key="article.id">
             <div class="text item">
@@ -59,6 +59,7 @@ export default {
     },
     data() {
         return {
+            keyword: '',
             current: 1,
             size: 5,
             articleList: [{

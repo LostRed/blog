@@ -36,7 +36,7 @@
                 </el-dropdown-menu>
             </el-dropdown>
             <div style="margin-left: 20px">
-                <el-button type="primary">
+                <el-button @click="toEditor" type="primary">
                     发表文章 <i class="el-icon-edit"></i>
                 </el-button>
             </div>
@@ -57,6 +57,13 @@ export default {
                 sex: null,
                 email: null
             }
+        }
+    },
+    methods: {
+        toEditor() {
+            this.$router.push({
+                name: 'Editor'
+            });
         }
     }
 }
