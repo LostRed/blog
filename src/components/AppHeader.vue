@@ -29,9 +29,10 @@
                         <el-link href="#" :underline="false">登录/注册</el-link>
                     </div>
                 </div>
-                <el-dropdown-menu slot="dropdown">
+                <el-dropdown-menu slot="dropdown" v-if="user.id">
                     <el-dropdown-item>个人中心</el-dropdown-item>
-                    <el-dropdown-item divided>我的收藏</el-dropdown-item>
+                    <el-dropdown-item divided>我的文章</el-dropdown-item>
+                    <el-dropdown-item>我的收藏</el-dropdown-item>
                     <el-dropdown-item divided>退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
@@ -50,9 +51,9 @@ export default {
     data() {
         return {
             user: {
-                id: null,
-                username: null,
-                avatar: null,
+                id: 1,
+                username: 'lostred',
+                avatar: 'avatar.jpg',
                 name: null,
                 sex: null,
                 email: null
