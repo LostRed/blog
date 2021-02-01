@@ -1,13 +1,15 @@
 <template>
-    <el-card class="box-card">
+    <el-card v-if="article.id" class="box-card">
         <div class="article-cover">
-            <el-image :src="article.cover" fit="cover" class="cover-image">
+            <el-image v-if="article.cover" :src="article.cover" fit="cover" class="cover-image">
                 <div slot="error" class="image-slot">
                     <i class="el-icon-picture-outline"></i>
                 </div>
             </el-image>
         </div>
+        <!--文章标题-->
         <h1>{{ article.title }}</h1>
+        <!--文章信息-->
         <div class="article-info">
             <div class="info-item">
                 <a href="#">
@@ -30,7 +32,17 @@
                 </a>
             </div>
         </div>
-        <p>{{ article.content }}</p>
+        <!--文章内容-->
+        <mavon-editor
+            :value="article.content"
+            :subfield="false"
+            :defaultOpen="'preview'"
+            :toolbarsFlag="false"
+            :editable="false"
+            :boxShadow="false"
+            :previewBackground="'#ffffff'"
+            style="border:none"
+        ></mavon-editor>
     </el-card>
 </template>
 
@@ -40,21 +52,30 @@ export default {
     data() {
         return {
             article: {
-                id: 0,
-                title: '文章标题',
-                content: '文章内容',
-                cover: 'example.jpg',
-                author: 'lostred',
-                avatar: 'avatar.jpg',
-                gmtCreate: '2020-01-25',
-                hot: 0,
-                catalogue: 'Java'
+                id: null,
+                title: null,
+                precis: null,
+                content: null,
+                cover: null,
+                author: null,
+                avatar: null,
+                gmtCreate: null,
+                hot: null,
+                catalogue: null
             }
         }
     },
     created() {
-        if (this.$route.params.article) {
-            this.article = this.$route.params.article;
+        // 前端测试
+        // this.$axios.get('/mock/article.json').then(response => {
+        //     this.article = response.data;
+        // });
+        // 调用后端api
+        if (this.$route.params.id) {
+            let id = this.$route.params.id;
+            this.$axios.get(`/api/blog/article/${id}`).then(response => {
+                this.article = response.data.data;
+            });
         }
     }
 }

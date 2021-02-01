@@ -8,12 +8,12 @@
                 <div class="content-wrapper" @click="toArticle(article)">
                     <div class="article-wrapper">
                         <h3 class="article-title">{{ article.title }}</h3>
-                        <p class="article-content">
-                            {{ article.content }}
+                        <p class="article-precis">
+                            {{ article.precis }}
                         </p>
                     </div>
                     <div class="article-cover hidden-xs-only">
-                        <el-image :src="article.cover" fit="cover" class="cover-image">
+                        <el-image v-if="article.cover" :src="article.cover" fit="cover" class="cover-image">
                             <div slot="error" class="image-slot">
                                 <i class="el-icon-picture-outline"></i>
                             </div>
@@ -53,7 +53,9 @@ export default {
         toArticle(article) {
             this.$router.push({
                 name: 'Article',
-                params: {article}
+                params: {
+                    id: article.id
+                }
             });
         }
     },
@@ -62,36 +64,26 @@ export default {
             keyword: '',
             current: 1,
             size: 5,
-            articleList: [{
-                id: 0,
-                title: '文章标题',
-                content: '文章内容',
-                cover: 'example.jpg',
-                author: 'lostred',
-                avatar: 'avatar.jpg',
-                gmtCreate: '2021-01-01',
-                hot: 0,
-                catalogue: 'Java'
-            }]
+            articleList: []
         }
     },
     mounted() {
         // 前端测试
-        this.$axios.get('/mock/article.json').then(response => {
-            console.log(response.data);
-            this.articleList = response.data;
-        });
-        // 调用后端api
-        // this.$axios.get('/api/blog/article/',
-        //     {
-        //         params: {
-        //             current: this.current,
-        //             size: this.size
-        //         }
-        //     }).then(response => {
-        //     console.log(response.data.data);
-        //     this.articleList = response.data.data.records;
+        // this.$axios.get('/mock/articleList.json').then(response => {
+        //     console.log(response.data);
+        //     this.articleList = response.data;
         // });
+        // 调用后端api
+        this.$axios.get('/api/blog/article/',
+            {
+                params: {
+                    current: this.current,
+                    size: this.size
+                }
+            }).then(response => {
+            console.log(response.data.data);
+            this.articleList = response.data.data.records;
+        });
     }
 }
 </script>

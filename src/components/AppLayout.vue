@@ -1,5 +1,10 @@
 <template>
     <el-container class="all-page">
+        <el-backtop>
+            <div>
+                <i class="el-icon-top"></i>
+            </div>
+        </el-backtop>
         <el-header>
             <div class="container">
                 <slot name="header"></slot>
