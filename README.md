@@ -30,5 +30,5 @@ npm i element-ui -S
 ### Install mavon-editor
 
 ```
-npm npm install mavon-editor --save
+npm install mavon-editor -S
 ```
