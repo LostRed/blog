@@ -1,5 +1,5 @@
 <template>
-    <el-card class="box-card">
+    <el-card class="box-card infinite-list-wrapper">
         <div class="search-wrapper">
             <el-input v-model="keyword" placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
         </div>
@@ -43,13 +43,55 @@
                 <el-divider></el-divider>
             </div>
         </div>
+        <p v-if="loading" style="text-align: center;font-size: 12px;"><i class="el-icon-loading"></i> 加载中...</p>
+        <p v-if="noMore" style="text-align: center;font-size: 12px;">没有更多了</p>
     </el-card>
 </template>
 
 <script>
 export default {
     name: "HomeCard",
+    data() {
+        return {
+            keyword: '',
+            current: 0,
+            size: 5,
+            total: 0,
+            articleList: [],
+            loading: false
+        };
+    },
+    computed: {
+        noMore() {
+            return this.articleList.length >= this.total;
+        }
+    },
     methods: {
+        handleScroll() {
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            let windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            if (scrollTop + windowHeight === scrollHeight && !this.noMore) {
+                this.load();
+            }
+        },
+        load() {
+            this.loading = true;
+            this.current++;
+            this.$axios.get('/api/blog/article/',
+                {
+                    params: {
+                        current: this.current,
+                        size: this.size
+                    }
+                }).then(response => {
+                console.log('文章列表数据：', response.data.data);
+                this.current = response.data.data.current;
+                this.total = response.data.data.total;
+                this.articleList = this.articleList.concat(response.data.data.records);
+                this.loading = false;
+            });
+        },
         toArticle(article) {
             this.$router.push({
                 name: 'Article',
@@ -59,31 +101,15 @@ export default {
             });
         }
     },
-    data() {
-        return {
-            keyword: '',
-            current: 1,
-            size: 5,
-            articleList: []
-        }
-    },
     mounted() {
+        document.addEventListener('scroll', this.handleScroll, true);
         // 前端测试
         // this.$axios.get('/mock/articleList.json').then(response => {
         //     console.log(response.data);
         //     this.articleList = response.data;
         // });
         // 调用后端api
-        this.$axios.get('/api/blog/article/',
-            {
-                params: {
-                    current: this.current,
-                    size: this.size
-                }
-            }).then(response => {
-            console.log('文章列表数据：', response.data.data);
-            this.articleList = response.data.data.records;
-        });
+        this.load();
     }
 }
 </script>

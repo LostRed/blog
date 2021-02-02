@@ -5,7 +5,7 @@
             <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
         </div>
         <div v-for="article in articleList" :key="article.id" class="text item">
-            <el-link :href="`#/article/${article.id}`" :underline="false">{{ article.title }}</el-link>
+            <el-link @click="toArticle(article)" :underline="false">{{ article.title }}</el-link>
         </div>
     </el-card>
 </template>
@@ -18,18 +18,31 @@ export default {
             articleList: []
         }
     },
+    methods: {
+        getNewArticleList() {
+            this.$axios.get('/api/blog/article/',
+                {
+                    params: {
+                        column: 'gmt_create',
+                        current: 1,
+                        size: 5
+                    }
+                }).then(response => {
+                this.articleList = response.data.data.records;
+            });
+        },
+        toArticle(article) {
+            this.$router.push({
+                name: 'Article',
+                params: {
+                    id: article.id
+                }
+            });
+        }
+    },
     created() {
         // 调用后端api
-        this.$axios.get('/api/blog/article/',
-            {
-                params: {
-                    column: 'gmt_create',
-                    current: 1,
-                    size: 5
-                }
-            }).then(response => {
-            this.articleList = response.data.data.records;
-        });
+        this.getNewArticleList();
     }
 }
 </script>
