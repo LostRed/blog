@@ -21,19 +21,19 @@
                     </div>
                 </div>
                 <div class="article-info">
-                    <div class="info-item">
-                        <a href="#">
+                    <div class="info-author">
+                        <a href="#" style="margin-right: 10px">
                             <el-avatar :size="30" fit="cover" :src="article.avatar">
                                 <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
                                      alt="avatar"/>
                             </el-avatar>
                         </a>
-                    </div>
-                    <div class="info-item">
                         <el-link href="#" :underline="false" style="font-size: 12px;">{{ article.author }}</el-link>
                     </div>
                     <div class="info-item">{{ article.gmtCreate.split("T")[0] }}</div>
-                    <div class="info-item"><i class="el-icon-view"></i> {{ article.hot }}</div>
+                    <div class="info-item">
+                        <i class="el-icon-view"></i> {{ article.hot }}
+                    </div>
                     <div class="info-item">
                         <a href="#">
                             <el-tag size="mini" type="info">{{ article.catalogue }}</el-tag>
@@ -81,7 +81,7 @@ export default {
                     size: this.size
                 }
             }).then(response => {
-            console.log(response.data.data);
+            console.log('文章列表数据：', response.data.data);
             this.articleList = response.data.data.records;
         });
     }
@@ -146,6 +146,12 @@ export default {
     display: flex;
     align-items: center;
     font-size: 12px;
+}
+
+.info-author {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
 }
 
 .info-item {

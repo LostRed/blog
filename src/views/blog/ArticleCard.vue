@@ -11,15 +11,13 @@
         <h1>{{ article.title }}</h1>
         <!--文章信息-->
         <div class="article-info">
-            <div class="info-item">
-                <a href="#">
+            <div class="info-author">
+                <a href="#" style="margin-right: 10px">
                     <el-avatar :size="30" fit="cover" :src="article.avatar">
                         <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
                              alt="avatar"/>
                     </el-avatar>
                 </a>
-            </div>
-            <div class="info-item">
                 <el-link href="#" :underline="false" style="font-size: 12px;">{{ article.author }}</el-link>
             </div>
             <div class="info-item">{{ article.gmtCreate.split("T")[0] }}</div>
@@ -70,13 +68,17 @@ export default {
         // this.$axios.get('/mock/article.json').then(response => {
         //     this.article = response.data;
         // });
-        // 调用后端api
-        if (this.$route.params.id) {
-            let id = this.$route.params.id;
+        // 调用后端api，加载文章数据
+        let id = this.$route.params.id;
+        if (id) {
             this.$axios.get(`/api/blog/article/${id}`).then(response => {
                 this.article = response.data.data;
             });
         }
+        // 调用后端api，更新热度
+        this.$axios.post(`/api/blog/article/${id}`).then(response => {
+            console.log('浏览文章：', response.data);
+        });
     }
 }
 </script>
@@ -99,6 +101,12 @@ export default {
     align-items: center;
     font-size: 12px;
     margin-bottom: 50px;
+}
+
+.info-author {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
 }
 
 .info-item {

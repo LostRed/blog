@@ -66,7 +66,18 @@ export default {
             // 调用后端api
             this.$axios.put('/api/blog/article/', article).then(response => {
                 console.log(response.data);
-                this.back();
+                if (response.data.code === 200) {
+                    this.$message.success('发布成功！');
+                    let id = response.data.data.id;
+                    this.$router.push({
+                        name: 'Article',
+                        params: {
+                            id: id
+                        }
+                    });
+                } else {
+                    this.$message.error('发布失败！');
+                }
             });
         }
     },

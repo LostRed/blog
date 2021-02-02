@@ -51,13 +51,13 @@ export default {
 }
 
 .left-container {
-    width: 100%;
+    width: 75%;
     display: flex;
     justify-content: center;
 }
 
 .right-container {
-    width: 360px;
+    width: 25%;
     padding-left: 20px;
 }
 </style>
