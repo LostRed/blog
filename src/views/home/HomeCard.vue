@@ -84,16 +84,18 @@ export default {
                         current: this.current,
                         size: this.size
                     }
-                }).then(response => {
-                console.log('文章列表数据：', response.data.data);
-                this.current = response.data.data.current;
-                this.total = response.data.data.total;
-                this.articleList = this.articleList.concat(response.data.data.records);
-                this.loading = false;
-            }).catch(error => {
-                console.log(error);
-                this.loading = false;
-            });
+                })
+                .then(response => {
+                    console.log('文章列表数据：', response.data.data);
+                    this.current = response.data.data.current;
+                    this.total = response.data.data.total;
+                    this.articleList = this.articleList.concat(response.data.data.records);
+                    this.loading = false;
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.loading = false;
+                });
         },
         toArticle(article) {
             this.$router.push({

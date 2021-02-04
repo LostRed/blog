@@ -27,9 +27,14 @@ export default {
                         current: 1,
                         size: 5
                     }
-                }).then(response => {
-                this.articleList = response.data.data.records;
-            });
+                })
+                .then(response => {
+                    this.articleList = response.data.data.records;
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.loading = false;
+                });
         },
         toArticle(article) {
             this.$router.push({
