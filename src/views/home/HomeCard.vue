@@ -90,6 +90,9 @@ export default {
                 this.total = response.data.data.total;
                 this.articleList = this.articleList.concat(response.data.data.records);
                 this.loading = false;
+            }).catch(error => {
+                console.log(error);
+                this.loading = false;
             });
         },
         toArticle(article) {
