@@ -32,14 +32,14 @@
         </div>
         <!--文章内容-->
         <mavon-editor
-            :value="article.content"
-            :subfield="false"
-            :defaultOpen="'preview'"
-            :toolbarsFlag="false"
-            :editable="false"
-            :boxShadow="false"
-            :previewBackground="'#ffffff'"
-            style="border:none"
+                :value="article.content"
+                :subfield="false"
+                :defaultOpen="'preview'"
+                :toolbarsFlag="false"
+                :editable="false"
+                :boxShadow="false"
+                :previewBackground="'#ffffff'"
+                style="border:none"
         ></mavon-editor>
     </el-card>
 </template>
