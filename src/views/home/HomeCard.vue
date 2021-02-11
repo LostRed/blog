@@ -56,7 +56,7 @@ export default {
             keyword: '',
             current: 0,
             size: 5,
-            total: 0,
+            total: 1,
             articleList: [],
             loading: false
         };

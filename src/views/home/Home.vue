@@ -5,13 +5,15 @@
         </template>
         <template>
             <div class="page">
-                <div class="left-container">
-                    <home-card/>
-                </div>
-                <div class="right-container hidden-md-and-down">
-                    <hot-card/>
-                    <new-card/>
-                </div>
+                <el-row :gutter="20" style="width: 100%">
+                    <el-col :xs="24" :sm="24" :md="24" :lg="17" :xl="17">
+                        <home-card/>
+                    </el-col>
+                    <el-col :span="7" class="hidden-md-and-down">
+                        <hot-card/>
+                        <new-card/>
+                    </el-col>
+                </el-row>
             </div>
         </template>
         <template v-slot:footer>
@@ -44,20 +46,9 @@ export default {
 <style scoped>
 .page {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     height: 100%;
     color: #aeb1b6;
-}
-
-.left-container {
-    width: 75%;
     display: flex;
     justify-content: center;
-}
-
-.right-container {
-    width: 25%;
-    padding-left: 20px;
 }
 </style>

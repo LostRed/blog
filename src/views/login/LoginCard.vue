@@ -11,18 +11,14 @@
                           placeholder="请输入密码"></el-input>
             </el-form-item>
             <el-form-item prop="captcha">
-                <el-row :gutter="5">
-                    <el-col :span="18">
+                <el-row :gutter="10">
+                    <el-col :span="17">
                         <el-input type="captcha" v-model="ruleForm.captcha" autocomplete="off"
                                   prefix-icon="el-icon-picture-outline"
                                   placeholder="请输入验证码"></el-input>
                     </el-col>
-                    <el-col :span="6">
-                        <el-image fit="cover" class="captcha-image">
-                            <div slot="error" class="image-slot">
-                                <i class="el-icon-picture-outline"></i>
-                            </div>
-                        </el-image>
+                    <el-col :span="7">
+                        <img :src="url" class="captcha-image" @click="getCaptcha" alt="验证码"/>
                     </el-col>
                 </el-row>
             </el-form-item>
@@ -79,19 +75,45 @@ export default {
                 captcha: [
                     {validator: validateCaptcha, trigger: 'blur'}
                 ]
-            }
+            },
+            url: "api/blog/authentication/captcha"
         };
     },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    this.login();
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
+        },
+        getCaptcha() {
+            this.url = "api/blog/authentication/captcha?" + Math.random();
+        },
+        login() {
+            this.$axios.get('/api/blog/authentication/user/login',
+                    {
+                        params: {
+                            username: this.ruleForm.username,
+                            password: this.ruleForm.password,
+                            captcha: this.ruleForm.captcha
+                        }
+                    })
+                    .then(response => {
+                        console.log('结果：', response.data);
+                        if (response.data.code === 200) {
+                            this.$store.commit('login', response.data.data);
+                            this.$router.push('/');
+                        } else {
+                            this.getCaptcha();
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
         }
     }
 }
@@ -116,8 +138,9 @@ export default {
 }
 
 .captcha-image {
-    width: 100%;
+    width: 90px;
     background: #E9EEF3;
     text-align: center;
+    cursor: pointer;
 }
 </style>
