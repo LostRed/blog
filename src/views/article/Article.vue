@@ -5,15 +5,13 @@
         </template>
         <template>
             <div class="page">
-                <el-row :gutter="20" style="width: 100%">
-                    <el-col :xs="24" :sm="24" :md="24" :lg="17" :xl="17">
-                        <article-card/>
-                    </el-col>
-                    <el-col :lg="7" :xl="7" class="hidden-md-and-down">
-                        <hot-card/>
-                        <new-card/>
-                    </el-col>
-                </el-row>
+                <el-col :xs="24" :sm="24" :md="24" :lg="17" :xl="17">
+                    <article-card/>
+                </el-col>
+                <el-col :lg="7" :xl="7" class="hidden-md-and-down" style="padding-left: 20px">
+                    <hot-card/>
+                    <new-card/>
+                </el-col>
             </div>
         </template>
         <template v-slot:footer>
