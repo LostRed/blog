@@ -18,6 +18,16 @@ const store = new VueX.Store({
     mutations: {
         login(state, user) {
             state.user = user;
+        },
+        exit(state) {
+            state.user = {
+                id: null,
+                username: null,
+                avatar: '',
+                name: null,
+                sex: null,
+                email: null
+            };
         }
     }
 });

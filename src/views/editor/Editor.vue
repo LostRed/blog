@@ -118,20 +118,21 @@ export default {
                 content: this.content
             };
             // 调用后端api
-            this.$axios.put('/api/blog/article/', article).then(response => {
-                if (response.data.code === 200) {
-                    this.$message.success('发布成功！');
-                    let id = response.data.data.id;
-                    this.$router.push({
-                        name: 'Article',
-                        params: {
-                            id: id
-                        }
-                    });
-                } else {
-                    this.$message.error('发布失败！');
-                }
-            });
+            this.$axios.put('/api/blog/article/', article)
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.$message.success('发布成功！');
+                        let id = response.data.data.id;
+                        this.$router.push({
+                            name: 'Article',
+                            params: {
+                                id: id
+                            }
+                        });
+                    } else {
+                        this.$message.error('发布失败！');
+                    }
+                });
         },
         imgAdd(pos, $file) {
             console.log("上传第" + pos + "个文件");

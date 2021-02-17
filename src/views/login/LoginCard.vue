@@ -25,7 +25,7 @@
             <el-button class="login-button" type="primary" @click="submitForm('ruleForm')">登录</el-button>
             <div class="other-button">
                 <el-button class="register-button" type="text">忘记密码</el-button>
-                <el-button class="register-button" type="text">立即注册</el-button>
+                <el-button class="register-button" type="text" @click="toRegister">立即注册</el-button>
             </div>
         </el-form>
     </el-card>
@@ -39,9 +39,6 @@ export default {
             if (value === '') {
                 callback(new Error('请输入用户名'));
             } else {
-                if (this.ruleForm.username !== '') {
-                    this.$refs.ruleForm.validateField('checkPass');
-                }
                 callback();
             }
         };
@@ -94,26 +91,28 @@ export default {
             this.url = "api/blog/authentication/captcha?" + Math.random();
         },
         login() {
-            this.$axios.get('/api/blog/authentication/user/login',
-                    {
-                        params: {
-                            username: this.ruleForm.username,
-                            password: this.ruleForm.password,
-                            captcha: this.ruleForm.captcha
-                        }
-                    })
-                    .then(response => {
-                        console.log('结果：', response.data);
-                        if (response.data.code === 200) {
-                            this.$store.commit('login', response.data.data);
-                            this.$router.push('/');
-                        } else {
-                            this.getCaptcha();
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+            this.$axios.post('/api/blog/authentication/user/login',
+                {
+                    username: this.ruleForm.username,
+                    password: this.ruleForm.password,
+                    captcha: this.ruleForm.captcha
+                })
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.$store.commit('login', response.data.data);
+                        this.$router.push('/');
+                    } else {
+                        this.getCaptcha();
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        toRegister() {
+            this.$router.push({
+                name: "Register"
+            });
         }
     }
 }

@@ -30,7 +30,7 @@
                     <el-dropdown-item>个人中心</el-dropdown-item>
                     <el-dropdown-item divided>我的文章</el-dropdown-item>
                     <el-dropdown-item>我的收藏</el-dropdown-item>
-                    <el-dropdown-item divided>退出</el-dropdown-item>
+                    <el-dropdown-item @click.native="exit" divided>退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
             <div v-else @click="toLogin">
@@ -74,7 +74,32 @@ export default {
             if (this.$route.path !== "/login") {
                 this.$router.push("/login");
             }
+        },
+        getUser() {
+            this.$axios.get('/api/blog/authentication/user/')
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.$store.commit('login', response.data.data);
+                    }
+                });
+        },
+        exit() {
+            this.$axios.post('/api/blog/authentication/user/exit')
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.$message.success('你已退出!');
+                        this.$store.commit('exit');
+                        this.$router.push({
+                            name: 'Login'
+                        });
+                    } else {
+                        this.$message.error('退出失败!');
+                    }
+                });
         }
+    },
+    created() {
+        this.getUser();
     }
 }
 </script>
