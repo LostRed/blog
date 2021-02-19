@@ -160,6 +160,7 @@ export default {
                             this.content = insertStr(str, index, nStr);
                         }
                         console.log("文件上传成功！")
+                        console.log("url: ",response.data.data)
                     }
                 });
         },
