@@ -73,7 +73,7 @@ export default {
                     {validator: validateCaptcha, trigger: 'blur'}
                 ]
             },
-            url: "api/blog/authentication/captcha"
+            url: "/api/blog/authentication/captcha"
         };
     },
     methods: {
@@ -88,7 +88,7 @@ export default {
             });
         },
         getCaptcha() {
-            this.url = "api/blog/authentication/captcha?" + Math.random();
+            this.url = "/api/blog/authentication/captcha?" + Math.random();
         },
         login() {
             this.$axios.post('/api/blog/authentication/user/login',
