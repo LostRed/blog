@@ -102,7 +102,7 @@ export default {
                 callback(new Error('请输入邮箱'));
             } else {
                 if (this.ruleForm.email !== '') {
-                    let regex =/^[A-Za-z0-9]+([_.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
+                    let regex = /^[A-Za-z0-9]+([_.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
                     if (!regex.test(this.ruleForm.email)) {
                         callback(new Error('请输入正确的邮箱格式'));
                     }
@@ -146,7 +146,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    this.register();
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -155,6 +155,28 @@ export default {
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();
+        },
+        register() {
+            this.$axios.put('/api/blog/user/',
+                {
+                    username: this.ruleForm.username,
+                    password: this.ruleForm.password,
+                    name: this.ruleForm.name,
+                    sex: this.ruleForm.sex,
+                    email: this.ruleForm.email
+                })
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.$message.success('注册成功!');
+                        this.$router.push('/login');
+                    } else {
+                        this.$message.error('注册失败!');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.$message.error('注册失败!');
+                });
         }
     }
 }

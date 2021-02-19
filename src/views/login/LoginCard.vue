@@ -99,9 +99,14 @@ export default {
                 })
                 .then(response => {
                     if (response.data.code === 200) {
+                        this.$message.success('登录成功!');
                         this.$store.commit('login', response.data.data);
                         this.$router.push('/');
+                    }else if (response.data.code === 500) {
+                        this.$message.warning(response.data.msg);
+                        this.getCaptcha();
                     } else {
+                        this.$message.error(response.data.msg);
                         this.getCaptcha();
                     }
                 })
