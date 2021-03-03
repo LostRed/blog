@@ -4,7 +4,7 @@ module.exports = {
         port: 10000,
         proxy: {
             '/api': {
-                // target: 'http://lostred.info:8080',
+                // target: 'http://lostred.info:8000',
                 target: 'http://localhost:8080',
                 // 允许跨域
                 changeOrigin: true,
