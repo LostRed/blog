@@ -1,5 +1,6 @@
 module.exports = {
     publicPath: './',
+    assetsDir: 'static',
     devServer: {
         port: 10000,
         proxy: {
